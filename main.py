@@ -150,6 +150,7 @@ class AlienInvasion:
             sleep(0.5)
         else:
             self.stats.game_active = False
+            pygame.mouse.set_visible(True)
 
     def _check_alients_bottom(self):
         screen_rect = self.screen.get_rect()
@@ -162,6 +163,7 @@ class AlienInvasion:
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
 
         if button_clicked and not self.stats.game_active:
+            pygame.mouse.set_visible(False)
             self.stats.reset_stats()
             self.stats.game_active = True
             self.aliens.empty()
