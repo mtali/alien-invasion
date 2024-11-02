@@ -55,17 +55,20 @@ class AlienInvasion:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
 
+    def _update_bullets(self):
+        self.bullets.update()
+
+        # remove bullets that dissapeared
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom < 0:
+                self.bullets.remove(bullet)
+
     def run_game(self):
         while True:
             self._check_event()
             self.ship.update()
-            self.bullets.update()
+            self._update_bullets()
             self._update_screen()
-
-            # remove bullets that dissapeared
-            for bullet in self.bullets.copy():
-                if bullet.rect.bottom < 0:
-                    self.bullets.remove(bullet)
 
 
 if __name__ == '__main__':
