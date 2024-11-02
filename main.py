@@ -61,6 +61,11 @@ class AlienInvasion:
             self.bullets.update()
             self._update_screen()
 
+            # remove bullets that dissapeared
+            for bullet in self.bullets.copy():
+                if bullet.rect.bottom < 0:
+                    self.bullets.remove(bullet)
+
 
 if __name__ == '__main__':
     ai = AlienInvasion()
