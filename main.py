@@ -89,11 +89,15 @@ class AlienInvasion:
             for alien_number in range(number_aliens_x):
                 self._create_alien(alien_number, row_number)
 
+    def _update_aliens(self):
+        self.aliens.update()
+
     def run_game(self):
         while True:
             self._check_event()
             self.ship.update()
             self._update_bullets()
+            self._update_aliens()
             self._update_screen()
 
 
