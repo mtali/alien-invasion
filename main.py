@@ -40,7 +40,7 @@ class AlienInvasion:
         if event.key == pygame.K_LEFT:
             self.ship.moving_left = False
 
-    def _check_event(self):
+    def _check_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -124,19 +124,22 @@ class AlienInvasion:
         self.settings.fleet_direction *= -1
 
     def _ship_hit(self):
-        # decrement ships left
-        self.stats.ships_left -= 1
+        # decrement ships left.
+        if self.stats.ships_left > 0:
+            self.stats.ships_left -= 1
 
-        # get rid on remaining aliens and bullets
-        self.aliens.empty()
-        self.bullets.empty()
+            # get rid on remaining aliens and bullets
+            self.aliens.empty()
+            self.bullets.empty()
 
-        # create new fleet and center ship
-        self._create_fleet()
-        self.ship.center_ship()
+            # create new fleet and center ship
+            self._create_fleet()
+            self.ship.center_ship()
 
-        # pause
-        sleep(0.5)
+            # pause
+            sleep(0.5)
+        else:
+            self.stats.game_active = False
 
     def _check_alients_bottom(self):
         screen_rect = self.screen.get_rect()
@@ -147,10 +150,11 @@ class AlienInvasion:
 
     def run_game(self):
         while True:
-            self._check_event()
-            self.ship.update()
-            self._update_bullets()
-            self._update_aliens()
+            self._check_events()
+            if self.stats.game_active:
+                self.ship.update()
+                self._update_bullets()
+                self._update_aliens()
             self._update_screen()
 
 
