@@ -8,6 +8,7 @@ from bullet import Bullet
 from game_stats import GameStats
 from settings import Settings
 from ship import Ship
+from button import Button
 
 
 class AlienInvasion:
@@ -23,6 +24,8 @@ class AlienInvasion:
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
         self._create_fleet()
+
+        self.play_button = Button(self, "Play")
 
     def _check_keydown_events(self, event):
         if event.key == pygame.K_RIGHT:
@@ -55,6 +58,10 @@ class AlienInvasion:
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.aliens.draw(self.screen)
+
+        if not self.stats.game_active:
+            self.play_button.draw()
+
         pygame.display.flip()
 
     def _fire_bullet(self):
