@@ -5,10 +5,10 @@ import pygame
 
 from alien import Alien
 from bullet import Bullet
+from button import Button
 from game_stats import GameStats
 from settings import Settings
 from ship import Ship
-from button import Button
 
 
 class AlienInvasion:
@@ -51,6 +51,9 @@ class AlienInvasion:
                 self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                self._check_play_button(mouse_pos)
 
     def _update_screen(self):
         self.screen.fill(self.settings.bg_color)
@@ -154,6 +157,17 @@ class AlienInvasion:
             if alien.rect.bottom >= screen_rect.bottom:
                 self._ship_hit()
                 break
+
+    def _check_play_button(self, mouse_pos):
+        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
+
+        if button_clicked and not self.stats.game_active:
+            self.stats.reset_stats()
+            self.stats.game_active = True
+            self.aliens.empty()
+
+            self._create_fleet()
+            self.ship.center_ship()
 
     def run_game(self):
         while True:
