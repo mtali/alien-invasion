@@ -2,10 +2,10 @@ import sys
 
 import pygame
 
+from alien import Alien
 from bullet import Bullet
 from settings import Settings
 from ship import Ship
-from alien import Alien
 
 
 class AlienInvasion:
@@ -69,7 +69,15 @@ class AlienInvasion:
 
     def _create_fleet(self):
         alien = Alien(self)
-        self.aliens.add(alien)
+        alient_width = alien.rect.width
+        available_space = self.settings.screen_width - (2 * alient_width)
+        number_aliens_x = available_space // (2 * alient_width)
+
+        for alien_number in range(number_aliens_x):
+            alien = Alien(self)
+            alien.x = alient_width + 2 * alient_width * alien_number
+            alien.rect.x = alien.x
+            self.aliens.add(alien)
 
     def run_game(self):
         while True:
