@@ -1,4 +1,4 @@
-**# Alien Invasion**
+# Alien Invasion
 
 A Python-Based Pygame Game
 
