@@ -97,6 +97,8 @@ class AlienInvasion:
             self.bullets.empty()
             self._create_fleet()
             self.settings.increate_speed()
+            self.stats.increment_level()
+            self.scoreboard.prep_level()
 
     def _create_alien(self, alien_number, row_number):
         alien = Alien(self)
@@ -177,6 +179,7 @@ class AlienInvasion:
             self.stats.reset_stats()
             self.stats.game_active = True
             self.scoreboard.prep_score()
+            self.scoreboard.prep_level()
             self.aliens.empty()
             self.bullets.empty()
 
