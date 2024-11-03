@@ -12,7 +12,7 @@ A Python-Based Pygame Game
 
 **Gameplay:**
 
-[Image of Gameplay GIF](resources/gameplay.gif)
+![Image of Gameplay GIF](resources/gameplay.gif)
 
 **License:**
 
