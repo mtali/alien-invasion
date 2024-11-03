@@ -13,3 +13,6 @@ class GameStats:
 
     def increment_level(self):
         self.level += 1
+
+    def decrement_ship_left(self):
+        self.ships_left -= 1
